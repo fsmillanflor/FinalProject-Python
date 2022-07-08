@@ -1,0 +1,103 @@
+#Creating a calculator (GUI interface) in python using the Tkinter library
+
+#Importing the functions to use from the tkinter module
+from tkinter import *
+
+#Importing math functions
+from math import*
+
+#DISPLAY THE OPERATION ON THE SCREEN
+def btnClick(num):
+    global operator             #Call the global expression variable
+    operator=operator+str(num)  #Concatenate the string
+    input_text.set(operator)    #Using set method to update the expression
+
+ 
+#CALCULATION AND SAMPLE OF RESULTS.
+def answer():
+    global operator
+#Using the Try and except statement to avoid division by zero errors.
+    try:
+        #Use the "eval" and "str" functions 
+        #to evaluate the expression and convert the result to a string.
+        oper=str(eval(operator)) 
+        input_text.set(oper)
+        operator=""          #Initializing the variable
+#Use the except block on error
+    except:
+        input_text.set("ERROR")  #SHOW "ERROR" ON CALCULATOR SCREEN
+        operator = ""
+
+ 
+#SCREEN CLEANING.
+def clear():
+
+    global operator  #Call the global expression variable
+    operator=("")
+    input_text.set("0")  #Show "0" on main screen
+
+
+#REMOVE WRONG DATA
+def delete():
+    global operator
+    operator = operator[:-1] #Delete one item at a time
+    input_text.set(operator)
+     
+#CREATE THE CALCULATOR INTERFACE
+window=Tk()   #Create a GUI window
+window.title("Calculator")  #Set the title to the window
+window.geometry("392x600")  #Set GUI window settings
+window.iconbitmap("C:\\Users\\Sarai\\Documents\\python-summer\\calculator.ico") #Set window icon
+window.resizable(0,0)  #Set window size
+window.configure(background="#71C671")  #Set window background
+color_button=("#308014")  #Set button color
+
+ #DESIGN THE STRUCTURE OF THE BUTTONS
+width_button=11
+high_button=3
+input_text=StringVar()
+operator=""
+font_button=("arial", 9, "bold")
+
+ 
+#DESIGN THE OUTPUT VIEW
+Output=Entry(window,font=('arial',20,'bold'),width=22,  
+textvariable=input_text,bd=20,insertwidth=4,bg="#BDFCC9",justify="right")
+Output.place(x=10,y=60)
+
+ 
+#ADD BUTTONS TO THE CREATED WINDOW.
+
+#CREATE BUTTONS AND DEFINE THE EXACT LOCATION WITHIN THE WINDOW
+Button(window,text="Delete",bg=color_button,width=width_button,height=high_button, font = font_button, command=delete).place(x=17,y=180)
+Button(window,text="C",bg=color_button,width=width_button,height=high_button, font = font_button, command=clear).place(x=107,y=180)
+Button(window,text="%",bg=color_button,width=width_button,height=high_button,font=font_button,command=lambda:btnClick("%")).place(x=197,y=180)
+Button(window,text="EXP",bg=color_button,width=width_button,height=high_button, font = font_button, command=lambda:btnClick("**")).place(x=287,y=180)
+Button(window,text="√",bg=color_button,width=width_button,height=high_button,font = font_button,command=lambda:btnClick("sqrt(")).place(x=17,y=240)
+Button(window,text="(",bg=color_button,width=width_button,height=high_button,font = font_button,command=lambda:btnClick("(")).place(x=107,y=240)
+Button(window,text=")",bg=color_button,width=width_button,height=high_button,font = font_button,command=lambda:btnClick(")")).place(x=197,y=240)
+Button(window,text="/",bg=color_button,width=width_button,height=high_button,font = font_button,command=lambda:btnClick("/")).place(x=287,y=240)
+Button(window,text="7",bg=color_button,width=width_button,height=high_button,font = font_button,command=lambda:btnClick(7)).place(x=17,y=300)
+Button(window,text="8",bg=color_button,width=width_button,height=high_button,font = font_button,command=lambda:btnClick(8)).place(x=107,y=300)
+Button(window,text="9",bg=color_button,width=width_button,height=high_button,font = font_button,command=lambda:btnClick(9)).place(x=197,y=300)
+Button(window,text="*",bg=color_button,width=width_button,height=high_button,font = font_button,command=lambda:btnClick("*")).place(x=287,y=300)
+Button(window,text="4",bg=color_button,width=width_button,height=high_button,font = font_button,command=lambda:btnClick(4)).place(x=17,y=360)
+Button(window,text="5",bg=color_button,width=width_button,height=high_button,font = font_button,command=lambda:btnClick(5)).place(x=107,y=360)
+Button(window,text="6",bg=color_button,width=width_button,height=high_button,font = font_button,command=lambda:btnClick(6)).place(x=197,y=360)
+Button(window,text="-",bg=color_button,width=width_button,height=high_button,font = font_button,command=lambda:btnClick("-")).place(x=287,y=360)
+Button(window,text="1",bg=color_button,width=width_button,height=high_button,font = font_button,command=lambda:btnClick(1)).place(x=17,y=420)
+Button(window,text="π",bg=color_button,width=width_button,height=high_button,font = font_button,command=lambda:btnClick("pi")).place(x=17,y=480)
+Button(window,text="0",bg=color_button,width=width_button,height=high_button,font = font_button,command=lambda:btnClick(0)).place(x=107,y=480)
+Button(window,text=".",bg=color_button,width=width_button,height=high_button,font = font_button,command=lambda:btnClick(".")).place(x=197,y=480)
+Button(window,text="=",bg=color_button,width=width_button,height=high_button,font = font_button,command=answer).place(x=287,y=480)
+Button(window,text="2",bg=color_button,width=width_button,height=high_button,font = font_button,command=lambda:btnClick(2)).place(x=107,y=420)
+Button(window,text="3",bg=color_button,width=width_button,height=high_button,font = font_button,command=lambda:btnClick(3)).place(x=197,y=420)
+Button(window,text="+",bg=color_button,width=width_button,height=high_button,font = font_button,command=lambda:btnClick("+")).place(x=287,y=420)
+ 
+
+#RUN THE CLEAR METHOD   
+clear()
+
+ 
+#RUN Tkinter EVENT LOOP
+window.mainloop()
